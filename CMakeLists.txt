@@ -183,9 +183,8 @@ if(CHOUPI_TARGET_PC)
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/javacard-os
       COMMAND
         cargo build --release --no-default-features --features host,big_ram
-        --manifest-path=${CMAKE_SOURCE_DIR}/os/Cargo.toml -Z unstable-options
-        --out-dir ${CMAKE_BINARY_DIR} --target-dir
-        ${CMAKE_BINARY_DIR}/javacard-os/
+        --manifest-path=${CMAKE_SOURCE_DIR}/os/Cargo.toml
+        --target-dir ${CMAKE_BINARY_DIR}/javacard-os/
       VERBATIM)
   endif(CHOUPI_OS_DEBUG)
 
@@ -363,7 +362,7 @@ if(CHOUPI_TARGET_PC)
   target_link_libraries(choupi m)
 endif()
 
-target_link_libraries(choupi -L${CHOUPI_JAVACARDOS_LIB})
+target_link_libraries(choupi -L${CHOUPI_JAVACARDOS_LIB}/javacard-os/release)
 target_link_libraries(choupi javacard_os)
 
 if(CHOUPI_TARGET_STM32)
