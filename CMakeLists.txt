@@ -202,6 +202,7 @@ elseif(CHOUPI_TARGET_STM32)
         cargo build --features stm32f401re --target thumbv7em-none-eabi 
         --target-dir ${CMAKE_BINARY_DIR}/javacard-os/
       VERBATIM)
+      set(CHOUPI_JAVACARDOS_LIB "${CMAKE_BINARY_DIR}/javacard-os/thumbv7em-none-eabi/debug")
   else(CHOUPI_OS_DEBUG)
     set(ENV{CARGOPROFILE} "release")
     add_custom_target(
@@ -211,13 +212,12 @@ elseif(CHOUPI_TARGET_STM32)
       BYPRODUCTS ${CMAKE_SOURCE_DIR}/libjavacard_os.a
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/javacard-os
       COMMAND
-        cargo build --release --features stm32f401re --target
-        thumbv7em-none-eabi --out-dir ${CMAKE_BINARY_DIR}
+        cargo build --release --features stm32f401re --target thumbv7em-none-eabi
         --target-dir ${CMAKE_BINARY_DIR}/javacard-os/
       VERBATIM)
+      set(CHOUPI_JAVACARDOS_LIB "${CMAKE_BINARY_DIR}/javacard-os/thumbv7em-none-eabi/release")
   endif(CHOUPI_OS_DEBUG)
 
-  set(CHOUPI_JAVACARDOS_LIB "${CMAKE_BINARY_DIR}")
 endif(CHOUPI_TARGET_PC)
 
 add_custom_target(
@@ -362,7 +362,7 @@ if(CHOUPI_TARGET_PC)
   target_link_libraries(choupi m)
 endif()
 
-target_link_libraries(choupi -L${CHOUPI_JAVACARDOS_LIB}/javacard-os/release)
+target_link_libraries(choupi -L${CHOUPI_JAVACARDOS_LIB})
 target_link_libraries(choupi javacard_os)
 
 if(CHOUPI_TARGET_STM32)
