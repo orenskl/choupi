@@ -1,6 +1,6 @@
 [submodule "os"]
 	path = os
-	url = https://github.com/pancanaka/choupi-os.git
+	url = https://github.com/orenskl/choupi-os.git
 [submodule "javacard-sdk/rommask"]
 	path = javacard-sdk/rommask
 	url = https://github.com/pancanaka/rommask.git
