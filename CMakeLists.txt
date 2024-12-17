@@ -171,9 +171,8 @@ if(CHOUPI_TARGET_PC)
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/javacard-os
       COMMAND
         cargo build --no-default-features --features host,big_ram
-        --manifest-path=${CMAKE_SOURCE_DIR}/os/Cargo.toml -Z unstable-options
-        --out-dir ${CMAKE_BINARY_DIR} --target-dir
-        ${CMAKE_BINARY_DIR}/javacard-os/
+        --manifest-path=${CMAKE_SOURCE_DIR}/os/Cargo.toml
+        --target-dir ${CMAKE_BINARY_DIR}/javacard-os/
       VERBATIM)
   else(CHOUPI_OS_DEBUG)
     add_custom_target(
@@ -184,9 +183,8 @@ if(CHOUPI_TARGET_PC)
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/javacard-os
       COMMAND
         cargo build --release --no-default-features --features host,big_ram
-        --manifest-path=${CMAKE_SOURCE_DIR}/os/Cargo.toml -Z unstable-options
-        --out-dir ${CMAKE_BINARY_DIR} --target-dir
-        ${CMAKE_BINARY_DIR}/javacard-os/
+        --manifest-path=${CMAKE_SOURCE_DIR}/os/Cargo.toml
+        --target-dir ${CMAKE_BINARY_DIR}/javacard-os/
       VERBATIM)
   endif(CHOUPI_OS_DEBUG)
 
@@ -201,10 +199,10 @@ elseif(CHOUPI_TARGET_STM32)
       BYPRODUCTS ${CMAKE_SOURCE_DIR}/libjavacard_os.a
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/javacard-os
       COMMAND
-        xargo build --features stm32f401re --target thumbv7em-none-eabi -Z
-        unstable-options --out-dir ${CMAKE_BINARY_DIR} --target-dir
-        ${CMAKE_BINARY_DIR}/javacard-os/
+        cargo build --features stm32f401re --target thumbv7em-none-eabi 
+        --target-dir ${CMAKE_BINARY_DIR}/javacard-os/
       VERBATIM)
+      set(CHOUPI_JAVACARDOS_LIB "${CMAKE_BINARY_DIR}/javacard-os/thumbv7em-none-eabi/debug")
   else(CHOUPI_OS_DEBUG)
     set(ENV{CARGOPROFILE} "release")
     add_custom_target(
@@ -214,13 +212,12 @@ elseif(CHOUPI_TARGET_STM32)
       BYPRODUCTS ${CMAKE_SOURCE_DIR}/libjavacard_os.a
       COMMAND ${CMAKE_COMMAND} -E make_directory ${CMAKE_BINARY_DIR}/javacard-os
       COMMAND
-        xargo build --release --features stm32f401re --target
-        thumbv7em-none-eabi -Z unstable-options --out-dir ${CMAKE_BINARY_DIR}
+        cargo build --release --features stm32f401re --target thumbv7em-none-eabi
         --target-dir ${CMAKE_BINARY_DIR}/javacard-os/
       VERBATIM)
+      set(CHOUPI_JAVACARDOS_LIB "${CMAKE_BINARY_DIR}/javacard-os/thumbv7em-none-eabi/release")
   endif(CHOUPI_OS_DEBUG)
 
-  set(CHOUPI_JAVACARDOS_LIB "${CMAKE_BINARY_DIR}")
 endif(CHOUPI_TARGET_PC)
 
 add_custom_target(
