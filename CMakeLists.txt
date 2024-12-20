@@ -174,6 +174,7 @@ if(CHOUPI_TARGET_PC)
         --manifest-path=${CMAKE_SOURCE_DIR}/os/Cargo.toml
         --target-dir ${CMAKE_BINARY_DIR}/javacard-os/
       VERBATIM)
+      set(CHOUPI_JAVACARDOS_LIB "${CMAKE_BINARY_DIR}/javacard-os/debug")
   else(CHOUPI_OS_DEBUG)
     add_custom_target(
       javacardos
@@ -187,8 +188,6 @@ if(CHOUPI_TARGET_PC)
         --target-dir ${CMAKE_BINARY_DIR}/javacard-os/
       VERBATIM)
   endif(CHOUPI_OS_DEBUG)
-
-  set(CHOUPI_JAVACARDOS_LIB "${CMAKE_BINARY_DIR}")
 elseif(CHOUPI_TARGET_STM32)
   if(CHOUPI_OS_DEBUG)
     set(ENV{CARGOPROFILE} "debug")
