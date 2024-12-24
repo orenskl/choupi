@@ -6,4 +6,4 @@
 	url = git@github.com:orenskl/rommask.git
 [submodule "javacard-sdk/javacard-api"]
 	path = javacard-sdk/javacard-api
-	url = https://github.com/pancanaka/javacard-api.git
+	url = git@github.com:orenskl/javacard-api.git
