@@ -19,15 +19,15 @@ device. Currently, this implementation provides a proof-of-concept of Java Card
 
 ## Dependencies
 
-### [Java Card & Global Platform API](https://github.com/choupi-project/javacard-api)
+### [Java Card & Global Platform API](https://github.com/orenskl/javacard-api)
 
 * ant
 
-### [Java Card RomMask generator](https://github.com/choupi-rommask/project)
+### [Java Card RomMask generator](https://github.com/orenskl/rommask)
 
 * maven
 
-### [Java Card Operating System](https://github.com/choupi-project/choupi-os)
+### [Java Card Operating System](https://github.com/orenskl/choupi-os)
 
  * The `arm-none-eabi` toolchain
  * openocd
@@ -44,17 +44,17 @@ To clone the repository and its dependency, you should execute the following
 command:
 
 ```
-git clone --recurse-submodules https://github.com/choupi-project/choupi
+git clone --recurse-submodules https://github.com/orenskl/choupi
 ```
 
 ## Toolchain setup
 
- The nightly version of [Rust](https://www.rust-lang.org/) is required. To
+ Version 1.75 of [Rust](https://www.rust-lang.org/) is required. To
  install it you should:
 
 1. Install `rustup`:
    ``` sh
-      curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+   curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
    ```
    
 2. Adding rust to your `PATH` file:
@@ -62,25 +62,12 @@ git clone --recurse-submodules https://github.com/choupi-project/choupi
    source ~/.cargo/env
    ```
 
-3. Install the nightly version of the rust compiler:
+3. Install the version 1.75 of the rust compiler:
    ```sh
-   rustup default nightly-2020-03-10
+   rustup default 1.75
    ```
 
-   To have a *ready-to-build* version of the Java Card OS. The last checked
-   version of rust nightly compiler is `1.43.0-nightly`.
-
-4. Install `xargo`:
-   ``` sh
-   cargo install xargo
-   ```
-
-5. Add `rust-src` component:
-   ``` sh
-   rustup component add rust-src
-   ```
-
-6. To build to ARM Cortex M4 board, you should run:
+4. To build to ARM Cortex M4 board, you should run:
    ``` sh
    rustup target add thumbv7em-none-eabi
    ```
